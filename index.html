@@ -7,7 +7,24 @@
 <meta property="og:description" content="Portfolio featuring Nexus Tactical Companion v5.1.0, a Windows 11 game-aware desktop app built with Claude Sonnet and Google Gemini.">
 <meta property="og:type" content="website">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M2 2h22l6 6v22H8l-6-6z' fill='%230E1620' stroke='%23F2A54A' stroke-width='2'/%3E%3Ctext x='16' y='21' font-family='Arial' font-weight='700' font-size='12' fill='%23F2A54A' text-anchor='middle'%3EGS%3C/text%3E%3C/svg%3E">
-<style>html{color-scheme:light}body{margin:0}img{max-width:100%}[hidden]{display:none!important}:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}</style>
+<style>html{color-scheme:light}body{margin:0}img{max-width:100%}[hidden]{display:none!important}:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+/* Pitstop section: mini report preview */
+.ps-report { margin-top: 32px; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); padding: 16px; display: grid; gap: 10px; max-width: 760px; }
+.ps-head { display: flex; justify-content: space-between; align-items: center; gap: 12px; font-size: var(--step--1); letter-spacing: 0.06em; }
+.ps-pill { font: 600 0.7rem var(--font-mono); letter-spacing: 0.08em; padding: 2px 8px; border-radius: 99px; border: 1px solid currentColor; }
+.ps-card { display: grid; gap: 2px; padding: 10px 12px; border: 1px solid var(--line); border-left: 4px solid var(--muted); border-radius: 8px; }
+.ps-card b { font-weight: 600; }
+.ps-card span { color: var(--muted); font-size: 0.92rem; }
+.ps-ok { --sev: #1f9d62; } .ps-watch { --sev: #c27c0e; } .ps-na { --sev: var(--muted); }
+.ps-card.ps-ok, .ps-card.ps-watch, .ps-card.ps-na { border-left-color: var(--sev); }
+.ps-pill.ps-watch { color: var(--sev); }
+.ps-cap { font-size: var(--step--1); color: var(--muted); }
+#pitstop .sec-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px 36px; }
+@media (max-width: 760px) { #pitstop .sec-list { grid-template-columns: 1fr; } }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .ps-ok { --sev: #3ddc97; } :root:not([data-theme="light"]) .ps-watch { --sev: #ffb547; } }
+:root[data-theme="dark"] .ps-ok { --sev: #3ddc97; } :root[data-theme="dark"] .ps-watch { --sev: #ffb547; }
+
+</style>
 <title>Giovanni Sanchez Portfolio</title>
 
 <meta name="description" content="Giovanni Alexander Sanchez — AI-native technical support, QA and operations. Featured project: Nexus Tactical Companion v5.1.0.">
@@ -276,6 +293,7 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
     <a class="brand" href="#top"><span class="brand-mark" aria-hidden="true">GS</span><span>Giovanni Sanchez</span></a>
     <nav class="nav" aria-label="Sections">
       <a href="#nexus">Nexus</a>
+      <a href="#pitstop">Pitstop</a>
       <a href="#architecture">Architecture</a>
       <a href="#qa">QA</a>
       <a href="#experience">Experience</a>
@@ -453,6 +471,85 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
           <div class="sec-item"><h3>Allowlisted message bridge</h3><p>The host-to-UI bridge checks origin, caps payloads at 200 KB, validates JSON shape and allows only known message types, covered by negative security tests U03, U06 and T23.</p></div>
           <div class="sec-item"><h3>End-to-end coverage</h3><p>Browser tests cover all 5 detection states (Idle, Client Open, Priority Yielding, Champ Select, In-Game), build duplication with 5-second undo, tag filtering and the 375×812 Compact HUD.</p></div>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PITSTOP -->
+  <section class="block" id="pitstop">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">Project 2 · 2026 · Creator, QA lead &amp; AI-assisted developer</p>
+        <h2>Pitstop: PC health checks and auto-switching profiles</h2>
+        <p class="lede">C# / .NET 8 · WinForms · Win32 interop (WMI, Event Log, powrprof, Core Audio) · xUnit · Inno Setup · GitHub Actions</p>
+      </div>
+
+      <div class="stats">
+        <div class="stat"><span class="stat-v">11 in 5.1 s</span><span class="stat-k">Read-only health checks, run in parallel</span></div>
+        <div class="stat"><span class="stat-v">141 / 141</span><span class="stat-k">Tests passing · 97.3% core line coverage</span></div>
+        <div class="stat"><span class="stat-v">−80%</span><span class="stat-k">Private memory after profiling (72 → 14 MB)</span></div>
+        <div class="stat"><span class="stat-v">0</span><span class="stat-k">Admin prompts, telemetry or force-kills</span></div>
+      </div>
+
+      <div class="problem" style="margin-top:40px">
+        <div class="prose">
+          <h3>The problem</h3>
+          <p style="margin-top:10px">The first 10 minutes of fixing a slow PC are always the same: updates, uptime, crash history, disk space, drivers, network. Then you explain it all in plain language. I did that by hand at Geek Squad and Pearson VUE, and I still do it for family.</p>
+          <p>My own PC had the opposite problem. Gaming, recording and work each want different power, audio and notification settings, and switching back and forth by hand rarely happens.</p>
+        </div>
+        <div class="prose">
+          <h3>What I built</h3>
+          <p style="margin-top:10px">A Windows 11 tray app. <b>Health Check</b> writes a shareable report in under 6 seconds, rating each item OK, Watch or Action with a plain-English fix. It's redacted by default.</p>
+          <p><b>Profiles</b> switch the power plan, default audio devices and notifications, and close or launch apps, when a chosen app starts or a hotkey is pressed. Everything is undone automatically, even after a crash.</p>
+        </div>
+      </div>
+
+      <div class="ps-report" aria-label="Sample Health Check report (excerpt)">
+        <div class="ps-head"><span class="mono">PITSTOP // HEALTH CHECK</span><span class="ps-pill ps-watch">WATCH</span></div>
+        <div class="ps-card ps-watch"><b>Driver age</b><span>Older than 2 years: Realtek High Definition Audio (2024-06-25). 7 virtual devices correctly ignored.</span></div>
+        <div class="ps-card ps-watch"><b>Disk space</b><span>C: 134 GB free of 1023 GB (13%). Free up space by running Disk Cleanup…</span></div>
+        <div class="ps-card ps-ok"><b>Network connection</b><span>Router 3 ms, 0% loss · internet 10 ms, 0% loss · DNS lookup 16 ms.</span></div>
+        <div class="ps-card ps-na"><b>Battery wear</b><span>No battery (desktop PC). Marked N/A, not counted as healthy.</span></div>
+        <p class="ps-cap">Excerpt from a real report on my own PC (PC name and username redacted).</p>
+      </div>
+
+      <div class="phases" aria-label="Pitstop build phases">
+        <div class="phase">
+          <span class="phase-n">Phase 1</span>
+          <h3>Design</h3>
+          <p>Scope, interfaces and a no-admin rule. I flagged 4 Windows limits up front and chose alternatives, like polling apps instead of admin-only start events.</p>
+          <span class="tools">DESIGN.md</span>
+        </div>
+        <div class="phase">
+          <span class="phase-n">Phase 2</span>
+          <h3>Health Check</h3>
+          <p>11 rules over WMI, Event Log, registry, ping and DNS. Pure parsers are tested against device IDs recorded from real hardware.</p>
+          <span class="tools">HTML + JSON reports</span>
+        </div>
+        <div class="phase">
+          <span class="phase-n">Phase 3</span>
+          <h3>Profiles engine</h3>
+          <p>Priority rules, global hotkeys, live config reload, break reminders, and a revert journal that restores settings after a forced crash.</p>
+          <span class="tools">Verified on real hardware</span>
+        </div>
+        <div class="phase">
+          <span class="phase-n">Phase 4</span>
+          <h3>Measure &amp; ship</h3>
+          <p>Profiled idle cost, removed an unused UI framework, and shipped a per-user installer with a CI pipeline.</p>
+          <span class="tools">0.03–0.10% CPU · 33 MB installer</span>
+        </div>
+      </div>
+
+      <div class="sec-list" style="margin-top:40px">
+        <div class="sec-item"><h3>BUG-004: the connection was fine, the measurement wasn't</h3><p>A wired PC showed 25% packet loss. I tested ping spacing against two providers (4/20 lost at 100 ms, 0 at 250 ms) and proved that public DNS servers throttle bursts of pings. The fix was to measure differently, not to loosen the threshold.</p></div>
+        <div class="sec-item"><h3>BUG-002: false alarms are bugs too</h3><p>8 "outdated drivers," 7 of them virtual (Steam audio, a VPN tunnel). Device IDs showed that software devices live under <span class="mono">ROOT\</span> and <span class="mono">SWD\</span>, so the check now grades only real hardware.</p></div>
+        <div class="sec-item"><h3>BUG-008: measure before optimizing</h3><p>The tray app used 72 MB of private memory. I traced it to a second UI framework that a windowless app didn't need, and removing it brought memory down to 14 MB. The full log covers 10 bugs, each written up as a support ticket.</p></div>
+        <div class="sec-item"><h3>Crash-safe by design</h3><p>A live test force-killed the app mid-profile. On restart, the on-disk revert journal put the power plan and audio device back exactly as they were.</p></div>
+      </div>
+
+      <div class="hero-actions" style="margin-top:28px">
+        <a class="btn btn-primary" href="https://github.com/doctorg1998/pitstop" target="_blank" rel="noopener">Code, tests &amp; bug log on GitHub ↗</a>
+        <a class="btn" href="https://github.com/doctorg1998/pitstop/blob/main/docs/CASE-STUDY.md" target="_blank" rel="noopener">Read the case study ↗</a>
       </div>
     </div>
   </section>
