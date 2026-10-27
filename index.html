@@ -1,0 +1,760 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta property="og:title" content="Giovanni Sanchez — AI-Native Technical Support, QA & Operations">
+<meta property="og:description" content="Portfolio featuring Nexus Tactical Companion v5.1.0, a Windows 11 game-aware desktop app built with Claude Sonnet and Google Gemini.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M2 2h22l6 6v22H8l-6-6z' fill='%230E1620' stroke='%23F2A54A' stroke-width='2'/%3E%3Ctext x='16' y='21' font-family='Arial' font-weight='700' font-size='12' fill='%23F2A54A' text-anchor='middle'%3EGS%3C/text%3E%3C/svg%3E">
+<style>html{color-scheme:light}body{margin:0}img{max-width:100%}[hidden]{display:none!important}:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}</style>
+<title>Giovanni Sanchez Portfolio</title>
+
+<meta name="description" content="Giovanni Alexander Sanchez — AI-native technical support, QA and operations. Featured project: Nexus Tactical Companion v5.1.0.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a single reading column (~1080px) framed like a diagnostic console —
+   a live HUD in the hero, then case study → evidence → career → contact. */
+:root {
+  --bg: #F3F5F7;          /* cool steel paper */
+  --surface: #FFFFFF;
+  --sunken: #E8ECF0;
+  --ink: #111A26;         /* navy ink */
+  --muted: #536173;
+  --line: #D3DAE2;
+  --accent: #B8570B;      /* HUD amber, darkened for contrast on light */
+  --accent-soft: #F6E6D6;
+  --signal: #0F7A5A;      /* pass / live */
+  --signal-soft: #DCF0E8;
+  --hud: #0E1620;         /* HUD window stays dark in both themes */
+  --hud-2: #16212E;
+  --hud-line: #263548;
+  --hud-ink: #DCE5EF;
+  --hud-muted: #8596AA;
+  --hud-amber: #F2A54A;
+  --hud-green: #4FD39B;
+  --font-display: "Chakra Petch", "Segoe UI", system-ui, sans-serif;
+  --font-body: "IBM Plex Sans", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "Cascadia Mono", Consolas, monospace;
+  --step--1: 0.8125rem; --step-0: 1rem; --step-1: 1.1875rem; --step-2: 1.5rem; --step-3: 2rem; --step-4: clamp(2.3rem, 5.4vw, 3.6rem);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0B1118; --surface: #121B26; --sunken: #0F1720; --ink: #E3EAF2; --muted: #93A2B4; --line: #223042;
+    --accent: #F2A54A; --accent-soft: #2E2214; --signal: #4FD39B; --signal-soft: #11291F;
+    --hud: #070C12; --hud-2: #0F1822; --hud-line: #22324A;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0B1118; --surface: #121B26; --sunken: #0F1720; --ink: #E3EAF2; --muted: #93A2B4; --line: #223042;
+  --accent: #F2A54A; --accent-soft: #2E2214; --signal: #4FD39B; --signal-soft: #11291F;
+  --hud: #070C12; --hud-2: #0F1822; --hud-line: #22324A;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { animation: none !important; transition: none !important; } }
+body {
+  background: var(--bg); color: var(--ink);
+  font-family: var(--font-body); font-size: var(--step-0); line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--bg); }
+a { color: inherit; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
+.wrap { max-width: 1080px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+.mono { font-family: var(--font-mono); }
+h1, h2, h3 { font-family: var(--font-display); text-wrap: balance; margin: 0; letter-spacing: -0.005em; }
+h2 { font-size: var(--step-3); line-height: 1.15; font-weight: 600; }
+h3 { font-size: var(--step-1); line-height: 1.3; font-weight: 600; }
+p { margin: 0; }
+.eyebrow { font-family: var(--font-mono); font-size: var(--step--1); letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); }
+.lede { color: var(--muted); max-width: 64ch; }
+
+/* ---------- top bar ---------- */
+.topbar { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 9; background: color-mix(in srgb, var(--bg) 88%, transparent); backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
+.topbar .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-block: 12px; }
+.brand { display: flex; align-items: center; gap: 10px; text-decoration: none; font-family: var(--font-display); font-weight: 600; }
+.brand-mark { display: grid; place-items: center; width: 32px; height: 32px; border: 1.5px solid var(--accent); color: var(--accent); font-size: 0.8rem; clip-path: polygon(0 0, 78% 0, 100% 22%, 100% 100%, 22% 100%, 0 78%); }
+.nav { display: flex; gap: 20px; font-size: var(--step--1); }
+.nav a { text-decoration: none; color: var(--muted); }
+.nav a:hover { color: var(--ink); }
+@media (max-width: 720px) { .nav { display: none; } }
+.btn { display: inline-flex; align-items: center; gap: 8px; padding: 10px 16px; border-radius: 6px; font: 500 var(--step--1)/1 var(--font-body); text-decoration: none; border: 1px solid var(--line); background: var(--surface); color: var(--ink); cursor: pointer; }
+.btn:hover { border-color: var(--accent); }
+.btn-primary { background: var(--accent); border-color: var(--accent); color: var(--bg); }
+.btn-primary:hover { filter: brightness(1.08); }
+
+/* ---------- hero ---------- */
+.hero { padding-block: 56px 40px; }
+.hero-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.08fr); gap: 48px; align-items: center; }
+@media (max-width: 900px) { .hero-grid { grid-template-columns: 1fr; gap: 36px; } }
+.hero h1 { font-size: var(--step-4); line-height: 1.02; font-weight: 700; margin-top: 14px; }
+.hero h1 .role { display: block; font-size: 0.48em; line-height: 1.25; font-weight: 500; color: var(--muted); margin-top: 14px; }
+.hero h1 .role b { color: var(--accent); font-weight: 600; }
+.hero .lede { margin-top: 20px; font-size: var(--step-1); line-height: 1.55; }
+.hero-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 26px; }
+.hero-meta { display: flex; flex-wrap: wrap; gap: 8px 18px; margin-top: 24px; font-size: var(--step--1); color: var(--muted); }
+.hero-meta span::before { content: "▸ "; color: var(--accent); }
+
+/* ---------- HUD simulator ---------- */
+.hud { background: var(--hud); color: var(--hud-ink); border: 1px solid var(--hud-line); border-radius: 10px; overflow: hidden; box-shadow: 0 24px 60px -30px rgba(5, 12, 20, 0.6); font-size: 0.875rem; }
+.hud-titlebar { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 9px 14px; background: var(--hud-2); border-bottom: 1px solid var(--hud-line); font-family: var(--font-mono); font-size: 0.72rem; color: var(--hud-muted); }
+.hud-titlebar .dots { display: flex; gap: 6px; }
+.hud-titlebar .dots i { width: 9px; height: 9px; border-radius: 50%; background: var(--hud-line); display: block; }
+.hud-url { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; min-width: 0; }
+.hud-body { padding: 16px; display: grid; gap: 14px; }
+.hud-row { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px; }
+.hud-label { font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--hud-muted); }
+.status { display: inline-flex; align-items: center; gap: 7px; font-family: var(--font-mono); font-size: 0.72rem; padding: 4px 9px; border-radius: 999px; border: 1px solid currentColor; }
+.status::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
+.status.live { color: var(--hud-green); }
+.status.live::before { animation: pulse 1.6s ease-in-out infinite; }
+.status.scan { color: var(--hud-amber); }
+@keyframes pulse { 50% { opacity: 0.25; } }
+.games { display: flex; flex-wrap: wrap; gap: 6px; }
+.games button { font: 500 0.75rem/1 var(--font-body); padding: 7px 10px; border-radius: 5px; border: 1px solid var(--hud-line); background: transparent; color: var(--hud-muted); cursor: pointer; }
+.games button:hover { color: var(--hud-ink); border-color: var(--hud-muted); }
+.games button[aria-pressed="true"] { background: var(--hud-amber); border-color: var(--hud-amber); color: #1A1206; }
+.proc { font-family: var(--font-mono); font-size: 0.75rem; color: var(--hud-muted); padding: 9px 11px; background: var(--hud-2); border-radius: 6px; border: 1px solid var(--hud-line); overflow-x: auto; white-space: nowrap; }
+.proc b { color: var(--hud-ink); font-weight: 500; }
+.lvl { display: grid; gap: 8px; }
+.lvl input[type="range"] { width: 100%; accent-color: var(--hud-amber); }
+.lvl-ticks { display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: 0.65rem; color: var(--hud-muted); }
+.lvl-readout { font-family: var(--font-display); font-size: 1.05rem; font-weight: 600; }
+.lvl-readout em { font-style: normal; color: var(--hud-amber); }
+.builds { display: grid; gap: 8px; }
+.build { display: grid; grid-template-columns: 1fr auto; gap: 4px 12px; padding: 10px 12px; border: 1px solid var(--hud-line); border-radius: 6px; background: var(--hud-2); }
+.build-name { font-weight: 600; }
+.build-tag { font-family: var(--font-mono); font-size: 0.68rem; color: var(--hud-amber); align-self: center; }
+.build-note { grid-column: 1 / -1; color: var(--hud-muted); font-size: 0.8rem; line-height: 1.45; }
+.hud-foot { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px; padding: 9px 14px; border-top: 1px solid var(--hud-line); font-family: var(--font-mono); font-size: 0.68rem; color: var(--hud-muted); }
+.hud-caption { margin-top: 10px; font-size: var(--step--1); color: var(--muted); }
+
+/* ---------- stat strip ---------- */
+.stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border: 1px solid var(--line); border-radius: 10px; background: var(--surface); }
+.stat { padding: 18px 20px; display: grid; gap: 4px; }
+.stat + .stat { border-left: 1px solid var(--line); }
+.stat-v { font-family: var(--font-display); font-size: var(--step-2); font-weight: 600; font-variant-numeric: tabular-nums; }
+.stat-k { font-size: var(--step--1); color: var(--muted); line-height: 1.4; }
+@media (max-width: 760px) { .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); } .stat:nth-child(3) { border-left: 0; } .stat:nth-child(n+3) { border-top: 1px solid var(--line); } }
+
+/* ---------- sections ---------- */
+section.block { padding-block: 72px 8px; }
+.sec-head { display: grid; gap: 10px; margin-bottom: 32px; }
+
+.problem { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 32px; }
+@media (max-width: 820px) { .problem { grid-template-columns: 1fr; } }
+.problem p + p { margin-top: 14px; }
+.problem .prose { max-width: 62ch; }
+.quote { border-left: 2px solid var(--accent); padding-left: 18px; font-size: var(--step-1); line-height: 1.5; }
+.quote small { display: block; margin-top: 10px; font-size: var(--step--1); color: var(--muted); }
+
+.phases { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0; margin-top: 40px; border-top: 1px solid var(--line); }
+.phase { padding: 20px 20px 0 0; display: grid; gap: 8px; align-content: start; }
+.phase + .phase { padding-left: 20px; border-left: 1px solid var(--line); }
+.phase-n { font-family: var(--font-mono); font-size: var(--step--1); color: var(--accent); }
+.phase p { font-size: 0.92rem; color: var(--muted); }
+.phase .tools { font-family: var(--font-mono); font-size: 0.7rem; color: var(--muted); }
+@media (max-width: 900px) { .phases { grid-template-columns: repeat(2, minmax(0, 1fr)); } .phase:nth-child(3) { padding-left: 0; border-left: 0; } .phase { padding-bottom: 20px; } }
+@media (max-width: 520px) { .phases { grid-template-columns: 1fr; } .phase + .phase { padding-left: 0; border-left: 0; border-top: 1px solid var(--line); } }
+
+/* architecture inspector */
+.inspector { display: grid; grid-template-columns: 240px minmax(0, 1fr); border: 1px solid var(--line); border-radius: 10px; overflow: hidden; background: var(--surface); }
+@media (max-width: 760px) { .inspector { grid-template-columns: 1fr; } }
+.mods { display: flex; flex-direction: column; border-right: 1px solid var(--line); background: var(--sunken); }
+@media (max-width: 760px) { .mods { flex-direction: row; overflow-x: auto; border-right: 0; border-bottom: 1px solid var(--line); } }
+.mods button { text-align: left; padding: 14px 16px; border: 0; border-bottom: 1px solid var(--line); background: transparent; color: var(--muted); font: 500 0.8rem/1.3 var(--font-mono); cursor: pointer; white-space: nowrap; }
+.mods button:hover { color: var(--ink); }
+.mods button[aria-selected="true"] { background: var(--surface); color: var(--ink); box-shadow: inset 3px 0 0 var(--accent); }
+.mod-panel { padding: 24px; display: grid; gap: 14px; min-width: 0; }
+.mod-panel .what { color: var(--muted); max-width: 64ch; }
+.mod-panel ul { margin: 0; padding-left: 18px; display: grid; gap: 6px; font-size: 0.94rem; }
+.impact { display: inline-flex; gap: 8px; align-items: baseline; padding: 10px 12px; border-radius: 6px; background: var(--signal-soft); color: var(--ink); font-size: 0.9rem; }
+.impact b { color: var(--signal); font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.06em; text-transform: uppercase; }
+pre.code { margin: 0; padding: 14px 16px; background: var(--hud); color: var(--hud-ink); border-radius: 6px; font: 0.78rem/1.6 var(--font-mono); overflow-x: auto; }
+pre.code .c { color: var(--hud-muted); }
+pre.code .k { color: var(--hud-amber); }
+
+/* games table */
+.table-scroll { overflow-x: auto; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); }
+table { width: 100%; border-collapse: collapse; font-size: 0.92rem; min-width: 680px; }
+th, td { text-align: left; padding: 13px 16px; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { font: 500 0.7rem/1.2 var(--font-mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); background: var(--sunken); }
+tr:last-child td { border-bottom: 0; }
+td.g { font-weight: 600; white-space: nowrap; }
+td code { font-family: var(--font-mono); font-size: 0.78rem; color: var(--accent); }
+td.n { font-variant-numeric: tabular-nums; text-align: right; white-space: nowrap; }
+td .pip { display: inline-block; width: 8px; height: 8px; margin-left: 2px; background: var(--accent); border-radius: 1px; }
+
+/* QA */
+.qa { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 32px; align-items: start; }
+@media (max-width: 860px) { .qa { grid-template-columns: 1fr; } }
+.qa-card { border: 1px solid var(--line); border-radius: 10px; background: var(--surface); padding: 20px; display: grid; gap: 16px; }
+.qa-top { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 10px; }
+.qa-total { font-family: var(--font-display); font-size: var(--step-2); font-weight: 600; font-variant-numeric: tabular-nums; }
+.qa-total span { color: var(--signal); }
+.bars { display: grid; gap: 10px; }
+.bar-row { display: grid; grid-template-columns: minmax(0, 190px) minmax(0, 1fr) 56px; gap: 12px; align-items: center; font-size: 0.82rem; }
+@media (max-width: 520px) { .bar-row { grid-template-columns: minmax(0, 1fr) 56px; } .bar-row .track { grid-column: 1 / -1; grid-row: 2; } }
+.bar-label { line-height: 1.3; }
+.bar-label small { display: block; color: var(--muted); font-family: var(--font-mono); font-size: 0.68rem; }
+.track { height: 12px; background: var(--sunken); border-radius: 3px; overflow: hidden; }
+.fill { height: 100%; width: 0; background: var(--signal); border-radius: 3px; transition: width 0.7s cubic-bezier(.2,.7,.2,1); }
+.bar-v { font: 500 0.75rem/1 var(--font-mono); color: var(--signal); text-align: right; font-variant-numeric: tabular-nums; }
+.scale { display: grid; grid-template-columns: minmax(0, 190px) minmax(0, 1fr) 56px; gap: 12px; font: 0.65rem/1 var(--font-mono); color: var(--muted); }
+.scale div { display: flex; justify-content: space-between; }
+@media (max-width: 520px) { .scale { grid-template-columns: 1fr; } .scale > span { display: none; } }
+.run-log { font: 0.75rem/1.7 var(--font-mono); background: var(--hud); color: var(--hud-muted); border-radius: 6px; padding: 12px 14px; height: 128px; overflow: auto; }
+.run-log .ok { color: var(--hud-green); }
+.sec-list { display: grid; gap: 18px; }
+.sec-item h3 { font-size: 1rem; }
+.sec-item p { color: var(--muted); font-size: 0.93rem; margin-top: 4px; }
+
+/* experience */
+.exp { display: grid; gap: 0; border-top: 1px solid var(--line); }
+.job { display: grid; grid-template-columns: 200px minmax(0, 1fr); gap: 24px; padding-block: 26px; border-bottom: 1px solid var(--line); }
+@media (max-width: 720px) { .job { grid-template-columns: 1fr; gap: 8px; } }
+.job-when { font-family: var(--font-mono); font-size: var(--step--1); color: var(--muted); line-height: 1.5; }
+.job-when b { display: block; color: var(--ink); font-family: var(--font-body); font-weight: 600; font-size: 0.95rem; }
+.job h3 { font-size: 1.1rem; }
+.job ul { margin: 10px 0 0; padding-left: 18px; display: grid; gap: 6px; color: var(--muted); max-width: 72ch; }
+.job ul strong { color: var(--ink); font-weight: 600; }
+
+/* skills */
+.skills { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px 40px; }
+@media (max-width: 720px) { .skills { grid-template-columns: 1fr; } }
+.skill h3 { font-size: 1rem; margin-bottom: 10px; }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chip { font-size: 0.8rem; padding: 5px 10px; border-radius: 4px; border: 1px solid var(--line); background: var(--surface); }
+
+/* education + writing */
+.duo { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 32px; }
+@media (max-width: 820px) { .duo { grid-template-columns: 1fr; } }
+.edu { display: grid; gap: 14px; }
+.edu-item { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 4px 16px; padding-bottom: 14px; border-bottom: 1px solid var(--line); }
+.edu-item:last-child { border-bottom: 0; }
+.edu-item .t { font-weight: 600; }
+.edu-item .s { color: var(--muted); font-size: 0.9rem; grid-column: 1; }
+.pill { grid-column: 2; grid-row: 1 / span 2; align-self: center; font: 500 0.68rem/1 var(--font-mono); padding: 5px 8px; border-radius: 999px; white-space: nowrap; }
+.pill.prog { background: var(--accent-soft); color: var(--accent); }
+.pill.gpa { background: var(--signal-soft); color: var(--signal); }
+.paper { padding: 18px 0; border-bottom: 1px solid var(--line); display: grid; gap: 6px; }
+.paper:first-child { padding-top: 0; }
+.paper:last-child { border-bottom: 0; }
+.paper .meta { font: 0.7rem/1.3 var(--font-mono); color: var(--muted); letter-spacing: 0.04em; }
+.paper p { color: var(--muted); font-size: 0.92rem; }
+
+/* contact */
+.contact { margin-block: 80px 0; padding-block: 48px; background: var(--hud); color: var(--hud-ink); }
+.contact-grid { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); gap: 32px; align-items: end; }
+@media (max-width: 820px) { .contact-grid { grid-template-columns: 1fr; } }
+.contact h2 { color: var(--hud-ink); }
+.contact .lede { color: var(--hud-muted); margin-top: 12px; }
+.contact .eyebrow { color: var(--hud-amber); }
+.contact-lines { display: grid; gap: 10px; }
+.cline { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px; padding: 12px 14px; border: 1px solid var(--hud-line); border-radius: 6px; background: var(--hud-2); }
+.cline .k { font: 0.68rem/1 var(--font-mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--hud-muted); display: block; margin-bottom: 4px; }
+.cline .v { font-family: var(--font-mono); font-size: 0.86rem; user-select: all; word-break: break-all; }
+.cline a.v { color: var(--hud-amber); text-decoration: none; user-select: auto; }
+.cline a.v:hover { text-decoration: underline; }
+.copy { font: 500 0.72rem/1 var(--font-mono); padding: 7px 10px; border-radius: 4px; border: 1px solid var(--hud-line); background: transparent; color: var(--hud-ink); cursor: pointer; }
+.copy:hover { border-color: var(--hud-amber); }
+footer { padding-block: 24px; font-size: var(--step--1); color: var(--hud-muted); background: var(--hud); border-top: 1px solid var(--hud-line); }
+footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px; }
+</style>
+
+
+</head>
+<body>
+<header class="topbar">
+  <div class="wrap">
+    <a class="brand" href="#top"><span class="brand-mark" aria-hidden="true">GS</span><span>Giovanni Sanchez</span></a>
+    <nav class="nav" aria-label="Sections">
+      <a href="#nexus">Nexus</a>
+      <a href="#architecture">Architecture</a>
+      <a href="#qa">QA</a>
+      <a href="#experience">Experience</a>
+      <a href="#skills">Skills</a>
+    </nav>
+    <a class="btn btn-primary" href="#contact">Contact</a>
+  </div>
+</header>
+
+<main id="top">
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <p class="eyebrow">Miami, FL · Open to remote roles</p>
+        <h1>Giovanni Alexander Sanchez
+          <span class="role">AI-native <b>Technical Support, QA &amp; Operations</b> specialist</span>
+        </h1>
+        <p class="lede">I troubleshoot, reproduce and document problems for a living, and I use Claude and Gemini to build the tools that make that work faster. My latest build is Nexus Tactical Companion: a Windows 11 desktop app that detects the game you're playing and serves the right build for your current level.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#nexus">Read the Nexus case study</a>
+          <a class="btn" href="https://www.linkedin.com/in/giovanni-sanchez-056b73315/" target="_blank" rel="noopener">LinkedIn ↗</a>
+        </div>
+        <div class="hero-meta">
+          <span>4+ years remote tech support</span>
+          <span>BSIT, AIU · GPA 3.88</span>
+          <span>CompTIA A+ / Net+ in progress</span>
+        </div>
+      </div>
+
+      <div>
+        <div class="hud" role="region" aria-label="Nexus HUD simulator">
+          <div class="hud-titlebar">
+            <span class="dots" aria-hidden="true"><i></i><i></i><i></i></span>
+            <span class="hud-url">Nexus Tactical Companion — https://nexus.app/index.html</span>
+            <span>v5.1.0</span>
+          </div>
+          <div class="hud-body">
+            <div class="hud-row">
+              <span class="hud-label">GameDetectionService · poll 5s</span>
+              <span class="status live" id="hud-status">IN-GAME</span>
+            </div>
+            <div class="games" id="hud-games" role="group" aria-label="Simulate a detected game"></div>
+            <div class="proc" id="hud-proc"></div>
+            <div class="lvl">
+              <div class="hud-row">
+                <label class="hud-label" for="hud-level">Character level</label>
+                <span class="lvl-readout" id="hud-readout"></span>
+              </div>
+              <input type="range" id="hud-level" min="1" max="60" value="25">
+              <div class="lvl-ticks" aria-hidden="true"><span>1 Starter</span><span>20 Core</span><span>40 Capstone</span><span>60 Max</span></div>
+            </div>
+            <div class="builds" id="hud-builds" aria-live="polite"></div>
+          </div>
+          <div class="hud-foot"><span id="hud-packs"></span><span>AlwaysOnTop: ON · Alt+C Compact HUD</span></div>
+        </div>
+        <p class="hud-caption">Try it: switch games to simulate process detection and drag the level slider. This is an illustrative recreation of the Nexus HUD behavior, not the shipped app.</p>
+      </div>
+    </div>
+
+    <div class="wrap" style="margin-top:48px">
+      <div class="stats">
+        <div class="stat"><span class="stat-v">7 / 27</span><span class="stat-k">Games supported / validated build packs</span></div>
+        <div class="stat"><span class="stat-v">31 / 31</span><span class="stat-k">Automated tests passing</span></div>
+        <div class="stat"><span class="stat-v">&lt; 1%</span><span class="stat-k">Estimated idle CPU (~85–140 MB RAM)</span></div>
+        <div class="stat"><span class="stat-v">0</span><span class="stat-k">Memory reads or DLL injection (anti-cheat safe)</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- NEXUS CASE STUDY -->
+  <section class="block" id="nexus">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">Featured project · 2026 · Creator &amp; AI-assisted developer</p>
+        <h2>Nexus Tactical Companion v5.1.0</h2>
+        <p class="lede">.NET 8 WPF · Microsoft Edge WebView2 · C# · PowerShell · Vanilla JS/CSS · JSON Schema v2.0 · Inno Setup · GitHub Actions</p>
+      </div>
+
+      <div class="problem">
+        <div class="prose">
+          <h3>The problem</h3>
+          <p style="margin-top:10px">Mid-match, players alt-tab out to look up builds, perk thresholds and loadouts. That breaks focus and costs time, and most overlay tools solve it with invasive memory hooks that anti-cheat systems flag.</p>
+          <p>Nexus runs as a single dark Windows 11 window. It notices which game is running, switches context on its own, and shows builds that adapt to the player's current level, without touching game memory.</p>
+        </div>
+        <div class="prose">
+          <h3>How I built it</h3>
+          <p style="margin-top:10px">I directed Claude Sonnet and Google Gemini as coding and diagnostic agents instead of hand-writing UI boilerplate and Win32 plumbing. I set the architecture constraints, versioned the data schema, and required every change to pass automated verification gates before I accepted it.</p>
+          <p class="quote" style="margin-top:18px">AI writes the first draft. Tests, schemas and code review decide what ships.<small>My working rule for every LLM-assisted change</small></p>
+        </div>
+      </div>
+
+      <div class="phases" aria-label="Build phases">
+        <div class="phase">
+          <span class="phase-n">Phase 1</span>
+          <h3>Schema design</h3>
+          <p>Wrote <span class="mono">build-pack.schema.json</span> to govern all 7 games and 27 packs, with 200 KB import caps and <span class="mono">__proto__</span> / constructor rejection.</p>
+          <span class="tools">Gemini + Claude</span>
+        </div>
+        <div class="phase">
+          <span class="phase-n">Phase 2</span>
+          <h3>Native desktop host</h3>
+          <p>Replaced early PowerShell watcher scripts with an in-process C# detection service and an isolated WebView2 virtual host.</p>
+          <span class="tools">.NET 8 WPF + WebView2</span>
+        </div>
+        <div class="phase">
+          <span class="phase-n">Phase 3</span>
+          <h3>Live telemetry</h3>
+          <p>Integrated the League of Legends LCU lockfile and Live Client API, plus level 1–60 planners that react to match state.</p>
+          <span class="tools">127.0.0.1:2999 + LCU</span>
+        </div>
+        <div class="phase">
+          <span class="phase-n">Phase 4</span>
+          <h3>Verification</h3>
+          <p>Built a regression suite of Node unit/schema tests, headless Chromium E2E tests over CDP, and C# xUnit core-logic tests.</p>
+          <span class="tools">31 / 31 passing</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ARCHITECTURE -->
+  <section class="block" id="architecture">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">Architecture &amp; security</p>
+        <h2>Inside the build</h2>
+        <p class="lede">Select a module to see what it does, how it was hardened, and why it matters.</p>
+      </div>
+      <div class="inspector">
+        <div class="mods" role="tablist" aria-label="Modules" id="mods"></div>
+        <div class="mod-panel" role="tabpanel" id="mod-panel" aria-live="polite"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GAMES -->
+  <section class="block" id="games">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">Coverage</p>
+        <h2>7 titles, 27 schema-validated build packs</h2>
+        <p class="lede">Each game is driven by a declarative <span class="mono">manifest.json</span> and a validated <span class="mono">builds.json</span> pack. When detection matches, the HUD loads that game's banner and filters builds by character, role, mode or custom tags.</p>
+      </div>
+      <div class="table-scroll">
+        <table>
+          <thead><tr><th>Game</th><th>Detected via</th><th>What the companion does</th><th style="text-align:right">Packs</th></tr></thead>
+          <tbody id="games-table"></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- QA -->
+  <section class="block" id="qa">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">Quality assurance</p>
+        <h2>Verified, not assumed</h2>
+        <p class="lede">I didn't accept raw LLM output. Every component went through static review and automated tests before packaging.</p>
+      </div>
+      <div class="qa">
+        <div class="qa-card">
+          <div class="qa-top">
+            <div class="qa-total"><span id="qa-count">31</span> / 31 passed</div>
+            <button class="btn" id="qa-run" type="button">▶ Re-run suite</button>
+          </div>
+          <div class="bars" id="qa-bars"></div>
+          <div class="scale" aria-hidden="true"><span></span><div><span>0</span><span>2</span><span>4</span><span>6</span><span>8</span><span>10</span></div><span></span></div>
+          <div class="run-log" id="qa-log" aria-live="polite"></div>
+        </div>
+        <div class="sec-list">
+          <div class="sec-item"><h3>Scoped loopback TLS, no global bypass</h3><p>Riot's local servers use a request-scoped certificate callback instead of a global <span class="mono">ServicePointManager</span> override, so all external HTTPS stays strictly validated.</p></div>
+          <div class="sec-item"><h3>Credential scrubbing</h3><p>Ephemeral auth strings from the Riot lockfile are cleared in <span class="mono">finally</span> blocks, and <span class="mono">Basic …</span> / <span class="mono">riot:…</span> tokens are redacted before anything reaches the error log.</p></div>
+          <div class="sec-item"><h3>Allowlisted message bridge</h3><p>The host-to-UI bridge checks origin, caps payloads at 200 KB, validates JSON shape and allows only known message types, covered by negative security tests U03, U06 and T23.</p></div>
+          <div class="sec-item"><h3>End-to-end coverage</h3><p>Browser tests cover all 5 detection states (Idle, Client Open, Priority Yielding, Champ Select, In-Game), build duplication with 5-second undo, tag filtering and the 375×812 Compact HUD.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section class="block" id="experience">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">Experience</p>
+        <h2>Where the troubleshooting instinct comes from</h2>
+      </div>
+      <div class="exp">
+        <article class="job">
+          <div class="job-when"><b>Norwegian Cruise Line</b>Nov 2021 – Present<br>Remote</div>
+          <div>
+            <h3>Cruise Specialist &amp; Remote Technical Support</h3>
+            <ul>
+              <li>Manage, audit and reconcile <strong>100+ daily</strong> reservations and enterprise records across Quest and Seaweb with strict data accuracy.</li>
+              <li>Deliver Tier 1/2 troubleshooting for booking-portal bugs, payment-gateway discrepancies and account access, holding a <strong>95%+ satisfaction</strong> rating.</li>
+              <li>Work with IT, operations and QA engineering to reproduce recurring defects, document root causes and streamline resolution.</li>
+              <li>Use structured documentation and templates to speed up asynchronous case resolution and cut repetitive data entry.</li>
+            </ul>
+          </div>
+        </article>
+        <article class="job">
+          <div class="job-when"><b>Self-employed</b>2022 – Present<br>Remote</div>
+          <div>
+            <h3>Freelance Audio &amp; Systems Diagnostics Specialist</h3>
+            <ul>
+              <li>Diagnose low-latency audio driver setups (ASIO, CoreAudio), OBS Studio broadcast pipelines and virtual audio routing for clients on Windows and macOS.</li>
+              <li>Resolve OS conflicts, corrupted peripheral drivers and local network streaming bottlenecks.</li>
+            </ul>
+          </div>
+        </article>
+        <article class="job">
+          <div class="job-when"><b>Pearson VUE</b>Sept 2019 – Aug 2021<br>Miami, FL</div>
+          <div>
+            <h3>Test Administrator &amp; Systems Proctor</h3>
+            <ul>
+              <li>Administered secure, high-stakes certification exams for <strong>500+ candidates monthly</strong> with <strong>100% compliance</strong>.</li>
+              <li>Ran hardware, network and application diagnostics, resolving terminal lockups, biometric scanner errors and secure-browser launch failures with zero session downtime.</li>
+            </ul>
+          </div>
+        </article>
+        <article class="job">
+          <div class="job-when"><b>GameStop</b>May 2017 – Aug 2020<br>Miami, FL</div>
+          <div>
+            <h3>Game Advisor &amp; Hardware Diagnostics Specialist</h3>
+            <ul>
+              <li>Ran hardware diagnostics, firmware updates and trade-in triage for consoles, PCs and peripherals, and managed POS inventory audits.</li>
+            </ul>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section class="block" id="skills">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">Core competencies</p>
+        <h2>Toolkit</h2>
+      </div>
+      <div class="skills">
+        <div class="skill"><h3>AI workflow &amp; prompt engineering</h3><div class="chips"><span class="chip">Claude Sonnet</span><span class="chip">Google Gemini</span><span class="chip">ChatGPT</span><span class="chip">Microsoft Copilot</span><span class="chip">AI-assisted prototyping</span><span class="chip">Prompt chaining</span><span class="chip">Ticket &amp; doc drafting</span></div></div>
+        <div class="skill"><h3>Technical operations &amp; CRM</h3><div class="chips"><span class="chip">Zendesk</span><span class="chip">Jira Service Management</span><span class="chip">Salesforce CRM</span><span class="chip">Quest</span><span class="chip">Seaweb</span><span class="chip">Queue management</span><span class="chip">SLA adherence</span><span class="chip">Excel / Google Sheets</span></div></div>
+        <div class="skill"><h3>Systems &amp; application diagnostics</h3><div class="chips"><span class="chip">Windows 10/11</span><span class="chip">macOS</span><span class="chip">Web app debugging</span><span class="chip">Browser DevTools</span><span class="chip">Process &amp; state detection</span><span class="chip">RDP</span></div></div>
+        <div class="skill"><h3>Networking &amp; security compliance</h3><div class="chips"><span class="chip">TCP/IP</span><span class="chip">DNS / DHCP</span><span class="chip">VPN troubleshooting</span><span class="chip">SSO / MFA</span><span class="chip">Audit readiness</span><span class="chip">Data governance</span></div></div>
+        <div class="skill"><h3>Build &amp; test stack (Nexus)</h3><div class="chips"><span class="chip">C# / .NET 8</span><span class="chip">WPF + WebView2</span><span class="chip">PowerShell</span><span class="chip">JavaScript</span><span class="chip">JSON Schema</span><span class="chip">xUnit</span><span class="chip">Chrome DevTools Protocol</span><span class="chip">GitHub Actions</span><span class="chip">Inno Setup</span></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EDUCATION + WRITING -->
+  <section class="block" id="education">
+    <div class="wrap duo">
+      <div>
+        <div class="sec-head"><p class="eyebrow">Education &amp; certifications</p><h2>Still leveling up</h2></div>
+        <div class="edu">
+          <div class="edu-item"><span class="t">B.S. Information Technology</span><span class="s">American InterContinental University · Expected Fall 2027</span><span class="pill gpa">GPA 3.88</span></div>
+          <div class="edu-item"><span class="t">Google IT Support Professional Certificate</span><span class="s">Google / Coursera</span><span class="pill prog">In progress</span></div>
+          <div class="edu-item"><span class="t">CompTIA A+ &amp; Network+</span><span class="s">CompTIA</span><span class="pill prog">In progress</span></div>
+        </div>
+      </div>
+      <div>
+        <div class="sec-head"><p class="eyebrow">Writing samples</p><h2>Analysis, with sources checked</h2></div>
+        <div>
+          <article class="paper">
+            <span class="meta">MGMT305 · Management Information Systems · Oct 2026</span>
+            <h3>Data at Rest, in Motion, and in Predictions: Zillow's Ecosystem</h3>
+            <p>A data-analyst teardown of Zillow: schema normalization across county records, geo-sharded NoSQL storage, Elasticsearch spatial search, Kafka event streams and the Neural Zestimate.</p>
+          </article>
+          <article class="paper">
+            <span class="meta">MGMT305 · Management Information Systems · Oct 2026</span>
+            <h3>AI-Assisted Research and Writing Process</h3>
+            <p>A documented account of using Gemini for research on AI in customer service, including where it helped, where it fabricated citations, and why I verify every source myself.</p>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="contact" id="contact">
+    <div class="wrap contact-grid">
+      <div>
+        <p class="eyebrow">Get in touch</p>
+        <h2 style="margin-top:10px">Hiring for support, QA or operations?</h2>
+        <p class="lede">I'm looking for remote roles where troubleshooting, clear documentation and practical AI tooling make a team faster. Happy to walk through Nexus live.</p>
+      </div>
+      <div class="contact-lines">
+        <div class="cline"><div><span class="k">Email</span><span class="v" id="email">doctorg1998@gmail.com</span></div><button class="copy" type="button" data-copy="email">Copy</button></div>
+        <div class="cline"><div><span class="k">LinkedIn</span><a class="v" href="https://www.linkedin.com/in/giovanni-sanchez-056b73315/" target="_blank" rel="noopener">giovanni-sanchez-056b73315 ↗</a></div></div>
+        <div class="cline"><div><span class="k">Location</span><span class="v">Miami, FL · Remote (US)</span></div></div>
+      </div>
+    </div>
+  </section>
+</main>
+<footer><div class="wrap"><span>© 2026 Giovanni Alexander Sanchez</span><span>Built with Claude · Nexus built with Claude Sonnet &amp; Google Gemini</span></div></footer>
+
+<script>
+(function () {
+  // ---------- HUD simulator ----------
+  var GAMES = [
+    { id: "cp", name: "Cyberpunk 2077", proc: "Cyberpunk2077.exe", state: "IN-GAME", packs: 3,
+      builds: [["Katana Solo", "Blades", "Reflexes-heavy melee build"], ["Netrunner", "Quickhacks", "Intelligence and cyberdeck RAM focus"], ["Solo Gunslinger", "Firearms", "Cool and Reflexes for precision weapons"]] },
+    { id: "lol", name: "League of Legends", proc: "LCU lockfile → 127.0.0.1:2999", state: "CHAMP SELECT", packs: 6,
+      builds: [["ARAM: Mayhem bruiser", "ARAM", "3-augment roll comparator active"], ["Burst mage", "Mid", "Champ Select hover/lock detected"], ["Enchanter support", "Support", "Bench detector watching swaps"]] },
+    { id: "sm2", name: "Space Marine 2", proc: "SpaceMarine2.exe", state: "IN-GAME", packs: 6,
+      builds: [["Bulwark", "PvE Ops", "Shield and banner sustain"], ["Sniper", "PvE Ops", "Relic weapon mastery tree"], ["Heavy", "PvE Ops", "Sustained-fire class template"]] },
+    { id: "hd2", name: "Helldivers 2", proc: "helldivers2.exe", state: "IN-GAME", packs: 3,
+      builds: [["Terminid sweep", "Bugs", "Crowd-control stratagem matrix"], ["Automaton breaker", "Bots", "Anti-armor armor passive pairing"], ["Illuminate response", "Squids", "Super Helldive loadout"]] },
+    { id: "dt", name: "Darktide", proc: "Darktide.exe", state: "IN-GAME", packs: 3,
+      builds: [["Reject talent path", "Talents", "Class talent tree"], ["Blessing synergies", "Weapons", "Weapon blessing pairings"], ["Auric Maelstrom", "Economy", "Curio stat priorities"]] },
+    { id: "r6", name: "Rainbow Six Siege", proc: "RainbowSix.exe", state: "IN-GAME", packs: 3,
+      builds: [["Entry attacker", "Attack", "Barrel and grip recoil config"], ["Anchor defender", "Defense", "Site execution checklist"], ["Support roamer", "Defense", "Role loadout template"]] },
+    { id: "wd", name: "WARDOGS", proc: "Wardogs.exe", state: "IN-GAME", packs: 3,
+      builds: [["$4k budget kit", "Eco", "Combined-arms template"], ["$7.5k standard", "Core", "Squad role progression"], ["$10k+ full kit", "Full buy", "Top-tier loadout"]] }
+  ];
+  var TIERS = [
+    [1, 19, "Starter", "Early-game priorities and first perk picks"],
+    [20, 39, "Core synergy", "Core perks online; key attribute thresholds"],
+    [40, 59, "Relic / capstone", "Capstone perks and high-tier itemization"],
+    [60, 60, "Max cap", "Full build complete; min-max endgame stats"]
+  ];
+  var current = GAMES[0], pid = 14820, timer = null;
+  var $ = function (id) { return document.getElementById(id); };
+  var gamesEl = $("hud-games"), statusEl = $("hud-status"), procEl = $("hud-proc"), lvl = $("hud-level");
+
+  GAMES.forEach(function (g) {
+    var b = document.createElement("button");
+    b.type = "button"; b.textContent = g.name; b.setAttribute("aria-pressed", g === current ? "true" : "false");
+    b.addEventListener("click", function () { detect(g); });
+    gamesEl.appendChild(b);
+  });
+
+  function tier(l) { for (var i = 0; i < TIERS.length; i++) if (l >= TIERS[i][0] && l <= TIERS[i][1]) return TIERS[i]; return TIERS[0]; }
+
+  function renderBuilds() {
+    var l = +lvl.value, t = tier(l);
+    $("hud-readout").innerHTML = "Lvl " + l + " · <em>" + t[2] + "</em>";
+    $("hud-builds").innerHTML = current.builds.map(function (b) {
+      return '<div class="build"><span class="build-name">' + b[0] + '</span><span class="build-tag">' + b[1] + '</span><span class="build-note">' + b[2] + " · " + t[3] + "</span></div>";
+    }).join("");
+    $("hud-packs").textContent = current.name + " · " + current.packs + " packs · schema v2.0 ✓";
+  }
+
+  function setProc(scanning) {
+    procEl.innerHTML = scanning
+      ? "Scanning processes… <b>BelowNormal</b> priority"
+      : "Process: <b>" + current.proc + "</b>" + (current.id === "lol" ? "" : " (PID " + pid + ")");
+  }
+
+  function detect(g) {
+    current = g; pid = 9000 + Math.floor(Math.random() * 9000);
+    Array.prototype.forEach.call(gamesEl.children, function (b, i) { b.setAttribute("aria-pressed", GAMES[i] === g ? "true" : "false"); });
+    statusEl.className = "status scan"; statusEl.textContent = "DETECTING";
+    setProc(true);
+    clearTimeout(timer);
+    timer = setTimeout(function () {
+      statusEl.className = "status live"; statusEl.textContent = g.state;
+      setProc(false); renderBuilds();
+    }, 650);
+  }
+  lvl.addEventListener("input", renderBuilds);
+  setProc(false); renderBuilds();
+
+  // ---------- architecture inspector ----------
+  var MODS = [
+    { name: "GameDetectionService.cs", title: "Background process detection",
+      what: "Polls running processes every 5 seconds at BelowNormal priority, plus local API handshakes for League of Legends, then tells the UI which game is active.",
+      points: ["Replaced early PowerShell watcher scripts with an in-process C# service", "No DLL injection and no memory reads, so it stays anti-cheat safe", "Single-instance Win32 mutex brings an existing window to focus instead of opening a second copy"],
+      impact: "Under 1% estimated idle CPU at ~85–140 MB RAM",
+      code: '<span class="c">// poll loop (simplified)</span>\n<span class="k">while</span> (!token.IsCancellationRequested) {\n  var game = Detect(Process.GetProcesses());\n  <span class="k">if</span> (game != _last) Bridge.Post(<span class="k">"game-changed"</span>, game);\n  <span class="k">await</span> Task.Delay(5000, token);\n}' },
+    { name: "AtomicStorage.cs", title: "Crash-safe persistence",
+      what: "Writes user builds to a temp file, flushes to disk, then renames over the original, so a power cut never leaves half-written JSON.",
+      points: [".tmp + fsync + rename write pattern", "200 KB cap on imported custom builds", "Rejects __proto__ and constructor keys to block prototype pollution"],
+      impact: "Zero JSON corruption on power loss",
+      code: 'File.WriteAllText(tmp, json);\n<span class="k">using</span> (var fs = File.Open(tmp, FileMode.Open))\n  fs.Flush(flushToDisk: <span class="k">true</span>);\nFile.Move(tmp, path, overwrite: <span class="k">true</span>);' },
+    { name: "LCU TLS & log scrubbing", title: "Safe local API access",
+      what: "Talks to Riot's loopback servers (127.0.0.1 and ::1) with certificate handling scoped to those requests only, and keeps credentials out of logs.",
+      points: ["Request-scoped HttpClientHandler callback, never a global TLS bypass", "Lockfile Basic Auth strings cleared in finally blocks", "App.ScrubSensitiveText redacts Basic … and riot:… tokens before writing app_error.log"],
+      impact: "External HTTPS stays strictly validated",
+      code: 'handler.ServerCertificateCustomValidationCallback =\n  (req, cert, chain, err) =>\n    IsLoopback(req.RequestUri) && err == RemoteCertificateChainErrors;' },
+    { name: "WebView2 bridge", title: "Native host ↔ web UI",
+      what: "The UI runs in Edge WebView2 on an isolated virtual host (https://nexus.app/) with DenyCors, inside one Windows 11 window.",
+      points: ["Origin verification on every message", "200 KB payload ceiling and JSON shape checks", "Explicit allowlist of message types, covered by negative tests U03, U06, T23"],
+      impact: "No browser tabs or console pop-ups for the user",
+      code: '<span class="k">if</span> (msg.Origin != <span class="k">"https://nexus.app"</span>) <span class="k">return</span>;\n<span class="k">if</span> (msg.Length > 200 * 1024) <span class="k">return</span>;\n<span class="k">if</span> (!Allowed.Contains(msg.Type)) <span class="k">return</span>;' },
+    { name: "NexusCompanion.iss & CI", title: "Installer and pipeline",
+      what: "A per-user Inno Setup installer and a GitHub Actions windows-latest workflow that builds and tests every change.",
+      points: ["Installs to %LOCALAPPDATA% with no admin (UAC) prompt", "build.yml runs the build and test suite on windows-latest", "Global hotkeys Ctrl+Alt+G / Ctrl+Alt+T and Compact HUD on Alt+C"],
+      impact: "Clean install without administrator rights",
+      code: '[Setup]\nPrivilegesRequired=lowest\nDefaultDirName={localappdata}\\NexusTacticalCompanion' }
+  ];
+  var modsEl = $("mods"), panel = $("mod-panel");
+  function esc(s) { return s.replace(/&/g, "&amp;").replace(/</g, "&lt;"); }
+  function showMod(i) {
+    var m = MODS[i];
+    Array.prototype.forEach.call(modsEl.children, function (b, j) { b.setAttribute("aria-selected", i === j ? "true" : "false"); b.tabIndex = i === j ? 0 : -1; });
+    panel.innerHTML = '<h3>' + m.title + '</h3><p class="what">' + esc(m.what) + '</p><ul>' +
+      m.points.map(function (p) { return "<li>" + esc(p) + "</li>"; }).join("") +
+      '</ul><span class="impact"><b>Impact</b> ' + m.impact + '</span><pre class="code">' + m.code + '</pre>';
+  }
+  MODS.forEach(function (m, i) {
+    var b = document.createElement("button");
+    b.type = "button"; b.setAttribute("role", "tab"); b.textContent = m.name;
+    b.addEventListener("click", function () { showMod(i); });
+    b.addEventListener("keydown", function (e) {
+      if (e.key === "ArrowDown" || e.key === "ArrowRight") { e.preventDefault(); var n = (i + 1) % MODS.length; showMod(n); modsEl.children[n].focus(); }
+      if (e.key === "ArrowUp" || e.key === "ArrowLeft") { e.preventDefault(); var p = (i - 1 + MODS.length) % MODS.length; showMod(p); modsEl.children[p].focus(); }
+    });
+    modsEl.appendChild(b);
+  });
+  showMod(0);
+
+  // ---------- games table ----------
+  var ROWS = [
+    ["Cyberpunk 2077", "Cyberpunk2077.exe", "Level 1–60 attribute & perk planner, cyberware capacity thresholds, katana / netrunner / solo loadouts", 3],
+    ["League of Legends (ARAM: Mayhem)", "LCU lockfile + Live API", "173-champion roster, live Champ Select hover/lock and ARAM bench detector, 3-augment roll comparator, opt-in Data Dragon sync", 6],
+    ["Warhammer 40K: Space Marine 2", "SpaceMarine2.exe", "6 PvE Operations class templates and interactive Relic weapon mastery perk trees", 6],
+    ["Helldivers 2", "helldivers2.exe", "Faction-specific stratagem matrices (Terminid, Automaton, Illuminate), armor passive pairings, Super Helldive loadouts", 3],
+    ["Warhammer 40,000: Darktide", "Darktide.exe", "Reject class talent trees, weapon blessing synergies, curio stat priorities, Auric Maelstrom guides", 3],
+    ["Rainbow Six Siege", "RainbowSix.exe", "Attacker and defender role loadouts, barrel/grip recoil configs, site execution checklists", 3],
+    ["WARDOGS", "Wardogs.exe", "Budget-tiered ($4k / $7.5k / $10k+) combined-arms loadouts and squad role progression", 3]
+  ];
+  $("games-table").innerHTML = ROWS.map(function (r) {
+    return '<tr><td class="g">' + r[0] + '</td><td><code>' + r[1] + '</code></td><td>' + esc(r[2]) + '</td><td class="n">' + r[3] + ' ' + new Array(r[3] + 1).join('<span class="pip" aria-hidden="true"></span>') + '</td></tr>';
+  }).join("");
+
+  // ---------- QA chart ----------
+  var SUITES = [
+    ["UI & state reactivity", "Chromium E2E", 10],
+    ["Build editor & filters", "Chromium E2E", 9],
+    ["Security & bridge guard", "Chromium E2E", 6],
+    ["Schema v2.0 & manifests", "Node unit", 2],
+    ["State machine & hotkeys", "Node unit", 2],
+    ["TLS, mutex & atomic I/O", "Static + xUnit", 2]
+  ];
+  var MAX = 10, barsEl = $("qa-bars"), logEl = $("qa-log"), countEl = $("qa-count");
+  barsEl.innerHTML = SUITES.map(function (s) {
+    return '<div class="bar-row"><span class="bar-label">' + s[0] + '<small>' + s[1] + '</small></span><div class="track"><div class="fill" data-w="' + (s[2] / MAX * 100) + '"></div></div><span class="bar-v">' + s[2] + '/' + s[2] + '</span></div>';
+  }).join("");
+  var fills = barsEl.querySelectorAll(".fill");
+  function fillAll() { Array.prototype.forEach.call(fills, function (f) { f.style.width = f.dataset.w + "%"; }); }
+  function staticLog() {
+    logEl.innerHTML = SUITES.map(function (s) { return '<div><span class="ok">PASS</span> ' + s[1] + " · " + s[0] + " (" + s[2] + "/" + s[2] + ")</div>"; }).join("") + '<div class="ok">31 passed, 0 failed</div>';
+  }
+  fillAll(); staticLog();
+
+  var running = false;
+  $("qa-run").addEventListener("click", function () {
+    if (running) return; running = true;
+    var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    Array.prototype.forEach.call(fills, function (f) { f.style.width = "0"; });
+    logEl.innerHTML = "<div>$ node tests/unit_tests.js && node tests/browser_tests.js</div>";
+    var done = 0, i = 0;
+    countEl.textContent = "0";
+    (function next() {
+      if (i >= SUITES.length) { logEl.insertAdjacentHTML("beforeend", '<div class="ok">31 passed, 0 failed</div>'); logEl.scrollTop = logEl.scrollHeight; running = false; return; }
+      var s = SUITES[i], f = fills[i];
+      f.style.width = f.dataset.w + "%";
+      done += s[2]; countEl.textContent = done;
+      logEl.insertAdjacentHTML("beforeend", '<div><span class="ok">PASS</span> ' + s[1] + " · " + s[0] + " (" + s[2] + "/" + s[2] + ")</div>");
+      logEl.scrollTop = logEl.scrollHeight;
+      i++; setTimeout(next, reduce ? 0 : 380);
+    })();
+  });
+
+  // ---------- copy ----------
+  Array.prototype.forEach.call(document.querySelectorAll("[data-copy]"), function (btn) {
+    btn.addEventListener("click", function () {
+      var el = $(btn.dataset.copy), text = el.textContent;
+      function selectIt() { var r = document.createRange(); r.selectNodeContents(el); var s = getSelection(); s.removeAllRanges(); s.addRange(r); btn.textContent = "Selected"; }
+      try {
+        navigator.clipboard.writeText(text).then(function () { btn.textContent = "Copied"; setTimeout(function () { btn.textContent = "Copy"; }, 1600); }, selectIt);
+      } catch (e) { selectIt(); }
+    });
+  });
+})();
+</script>
+
+</body>
+</html>
