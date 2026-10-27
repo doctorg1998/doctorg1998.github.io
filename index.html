@@ -23,6 +23,23 @@
 @media (max-width: 760px) { #pitstop .sec-list { grid-template-columns: 1fr; } }
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .ps-ok { --sev: #3ddc97; } :root:not([data-theme="light"]) .ps-watch { --sev: #ffb547; } }
 :root[data-theme="dark"] .ps-ok { --sev: #3ddc97; } :root[data-theme="dark"] .ps-watch { --sev: #ffb547; }
+/* Pitstop section: live dashboard demo (the real UI with sample data, scaled to fit) and proof strip */
+.ps-demo-head { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; flex-wrap: wrap; margin: 40px 0 14px; }
+.ps-demo-head h3 { margin: 0; }
+.ps-demo-head p { margin: 0; color: var(--muted); font-size: var(--step--1); }
+.ps-demo { position: relative; width: 100%; aspect-ratio: 1320 / 860; overflow: hidden; border-radius: 12px; border: 1px solid var(--line); background: #0d1117; box-shadow: 0 18px 50px rgba(0,0,0,.28); }
+.ps-demo iframe { position: absolute; top: 0; left: 0; width: 1320px; height: 860px; border: 0; transform-origin: 0 0; }
+.ps-demo-fallback { display: none; }
+.ps-demo-fallback img { width: 100%; height: auto; border-radius: 10px; border: 1px solid var(--line); display: block; }
+@media (max-width: 700px) { .ps-demo { display: none; } .ps-demo-fallback { display: grid; gap: 12px; } }
+.ps-proof { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0; margin-top: 22px; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); }
+.ps-proof > div { padding: 14px 18px; display: grid; gap: 6px; align-content: start; }
+.ps-proof > div + div { border-left: 1px solid var(--line); }
+.ps-proof .k { font: 500 var(--step--1) var(--font-mono); color: var(--muted); letter-spacing: .04em; text-transform: uppercase; }
+.ps-proof .v { font-weight: 600; }
+.ps-proof img { height: 20px; width: auto; }
+@media (max-width: 860px) { .ps-proof { grid-template-columns: repeat(2, minmax(0, 1fr)); } .ps-proof > div:nth-child(3) { border-left: 0; } .ps-proof > div:nth-child(n+3) { border-top: 1px solid var(--line); } }
+@media (max-width: 480px) { .ps-proof { grid-template-columns: 1fr; } .ps-proof > div + div { border-left: 0; border-top: 1px solid var(--line); } }
 
 </style>
 <title>Giovanni Sanchez Portfolio</title>
@@ -481,13 +498,13 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
       <div class="sec-head">
         <p class="eyebrow">Project 2 · 2026 · Creator, QA lead &amp; AI-assisted developer</p>
         <h2>Pitstop: PC health checks and auto-switching profiles</h2>
-        <p class="lede">C# / .NET 8 · WinForms · Win32 interop (WMI, Event Log, powrprof, Core Audio) · xUnit · Inno Setup · GitHub Actions</p>
+        <p class="lede">C# / .NET 8 · WinForms · WebView2 dashboard · Win32 interop (WMI, Event Log, powrprof, Core Audio) · xUnit · Inno Setup · GitHub Actions</p>
       </div>
 
       <div class="stats">
         <div class="stat"><span class="stat-v">11 in 5.1 s</span><span class="stat-k">Read-only health checks, run in parallel</span></div>
-        <div class="stat"><span class="stat-v">141 / 141</span><span class="stat-k">Tests passing · 97.3% core line coverage</span></div>
-        <div class="stat"><span class="stat-v">−80%</span><span class="stat-k">Private memory after profiling (72 → 14 MB)</span></div>
+        <div class="stat"><span class="stat-v">177 / 177</span><span class="stat-k">Tests passing · 97% core line coverage</span></div>
+        <div class="stat"><span class="stat-v">−80%</span><span class="stat-k">Tray memory after profiling (72 → 14 MB)</span></div>
         <div class="stat"><span class="stat-v">0</span><span class="stat-k">Admin prompts, telemetry or force-kills</span></div>
       </div>
 
@@ -499,18 +516,26 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
         </div>
         <div class="prose">
           <h3>What I built</h3>
-          <p style="margin-top:10px">A Windows 11 tray app. <b>Health Check</b> writes a shareable report in under 6 seconds, rating each item OK, Watch or Action with a plain-English fix. It's redacted by default.</p>
-          <p><b>Profiles</b> switch the power plan, default audio devices and notifications, and close or launch apps, when a chosen app starts or a hotkey is pressed. Everything is undone automatically, even after a crash.</p>
+          <p style="margin-top:10px">A Windows 11 app with a full dashboard. <b>Health Check</b> scores the PC from 0 to 100 in about 5 seconds and explains each finding with a plain-English fix. Live graphs show processor, memory and network use.</p>
+          <p><b>Profiles</b> switch the power plan, default audio devices and notifications, and close or open apps, when a chosen app starts or a hotkey is pressed. Everything is undone automatically, even after a crash.</p>
         </div>
       </div>
 
-      <div class="ps-report" aria-label="Sample Health Check report (excerpt)">
-        <div class="ps-head"><span class="mono">PITSTOP // HEALTH CHECK</span><span class="ps-pill ps-watch">WATCH</span></div>
-        <div class="ps-card ps-watch"><b>Driver age</b><span>Older than 2 years: Realtek High Definition Audio (2024-06-25). 7 virtual devices correctly ignored.</span></div>
-        <div class="ps-card ps-watch"><b>Disk space</b><span>C: 134 GB free of 1023 GB (13%). Free up space by running Disk Cleanup…</span></div>
-        <div class="ps-card ps-ok"><b>Network connection</b><span>Router 3 ms, 0% loss · internet 10 ms, 0% loss · DNS lookup 16 ms.</span></div>
-        <div class="ps-card ps-na"><b>Battery wear</b><span>No battery (desktop PC). Marked N/A, not counted as healthy.</span></div>
-        <p class="ps-cap">Excerpt from a real report on my own PC (PC name and username redacted).</p>
+      <div class="ps-demo-head">
+        <h3>Try the dashboard</h3>
+        <p>The real app's interface, running live with sample data. Click around: pages, profiles and Health Check all respond.</p>
+      </div>
+      <div class="ps-demo" id="ps-demo"><iframe src="pitstop-demo.html" title="Pitstop dashboard, interactive demo with sample data" loading="lazy"></iframe></div>
+      <div class="ps-demo-fallback">
+        <img src="https://raw.githubusercontent.com/doctorg1998/pitstop/main/docs/screenshots/overview.png" alt="Pitstop dashboard overview: health score 82, live processor and memory graph, quick stats" loading="lazy" width="1650" height="1075">
+        <a class="btn btn-primary" href="pitstop-demo.html" target="_blank" rel="noopener">Open the live demo ↗</a>
+      </div>
+
+      <div class="ps-proof" aria-label="Proof it works">
+        <div><span class="k">Build</span><a href="https://github.com/doctorg1998/pitstop/actions/workflows/ci.yml" target="_blank" rel="noopener"><img src="https://github.com/doctorg1998/pitstop/actions/workflows/ci.yml/badge.svg" alt="CI status" width="92" height="20"></a><span class="muted" style="font-size:.85rem">Build, test and package on every push</span></div>
+        <div><span class="k">Verified on real hardware</span><span class="v">22 live scenarios</span><span class="muted" style="font-size:.85rem">Profile switch, crash recovery, install and uninstall</span></div>
+        <div><span class="k">Security</span><span class="v">Forged commands rejected</span><span class="muted" style="font-size:.85rem">The UI is untrusted, so every message is allowlisted</span></div>
+        <div><span class="k">Download</span><a class="btn btn-primary" href="https://github.com/doctorg1998/pitstop/releases/latest" target="_blank" rel="noopener" style="justify-self:start">Pitstop v1.1.0 ↗</a><span class="muted" style="font-size:.85rem">33 MB, per-user, no admin</span></div>
       </div>
 
       <div class="phases" aria-label="Pitstop build phases">
@@ -523,7 +548,7 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
         <div class="phase">
           <span class="phase-n">Phase 2</span>
           <h3>Health Check</h3>
-          <p>11 rules over WMI, Event Log, registry, ping and DNS. Pure parsers are tested against device IDs recorded from real hardware.</p>
+          <p>11 rules over WMI, Event Log, registry, ping and DNS. Pure parsers are tested against device IDs shaped like real hardware.</p>
           <span class="tools">HTML + JSON reports</span>
         </div>
         <div class="phase">
@@ -534,16 +559,16 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
         </div>
         <div class="phase">
           <span class="phase-n">Phase 4</span>
-          <h3>Measure &amp; ship</h3>
-          <p>Profiled idle cost, removed an unused UI framework, and shipped a per-user installer with a CI pipeline.</p>
-          <span class="tools">0.03–0.10% CPU · 33 MB installer</span>
+          <h3>Dashboard &amp; ship</h3>
+          <p>A WebView2 dashboard with hand-drawn charts, a locked-down message bridge, measured idle cost, and a per-user installer published by CI.</p>
+          <span class="tools">0.05% CPU when closed · 33 MB installer</span>
         </div>
       </div>
 
       <div class="sec-list" style="margin-top:40px">
         <div class="sec-item"><h3>BUG-004: the connection was fine, the measurement wasn't</h3><p>A wired PC showed 25% packet loss. I tested ping spacing against two providers (4/20 lost at 100 ms, 0 at 250 ms) and proved that public DNS servers throttle bursts of pings. The fix was to measure differently, not to loosen the threshold.</p></div>
-        <div class="sec-item"><h3>BUG-002: false alarms are bugs too</h3><p>8 "outdated drivers," 7 of them virtual (Steam audio, a VPN tunnel). Device IDs showed that software devices live under <span class="mono">ROOT\</span> and <span class="mono">SWD\</span>, so the check now grades only real hardware.</p></div>
-        <div class="sec-item"><h3>BUG-008: measure before optimizing</h3><p>The tray app used 72 MB of private memory. I traced it to a second UI framework that a windowless app didn't need, and removing it brought memory down to 14 MB. The full log covers 10 bugs, each written up as a support ticket.</p></div>
+        <div class="sec-item"><h3>BUG-002: false alarms are bugs too</h3><p>8 "outdated drivers," 7 of them virtual (game-streaming audio, a VPN tunnel). Device IDs showed that software devices live under <span class="mono">ROOT\</span> and <span class="mono">SWD\</span>, so the check now grades only real hardware.</p></div>
+        <div class="sec-item"><h3>BUG-008: measure before optimizing</h3><p>The tray app used 72 MB of private memory. I traced it to a second UI framework that a windowless app didn't need, and removing it brought memory down to 14 MB. The full log covers 15 bugs, each written up as a support ticket.</p></div>
         <div class="sec-item"><h3>Crash-safe by design</h3><p>A live test force-killed the app mid-profile. On restart, the on-disk revert journal put the power plan and audio device back exactly as they were.</p></div>
       </div>
 
@@ -553,6 +578,15 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
       </div>
     </div>
   </section>
+  <script>
+  // Scale the 1320 × 860 dashboard demo to fit the column without changing its layout.
+  (function () {
+    var box = document.getElementById("ps-demo");
+    if (!box || !window.ResizeObserver) return;
+    var frame = box.querySelector("iframe");
+    new ResizeObserver(function () { frame.style.transform = "scale(" + box.clientWidth / 1320 + ")"; }).observe(box);
+  })();
+  </script>
 
   <!-- EXPERIENCE -->
   <section class="block" id="experience">
